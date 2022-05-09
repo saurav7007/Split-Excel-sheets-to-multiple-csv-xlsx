@@ -1,4 +1,4 @@
-# Split-Excel-sheets-to-multiple-csv-xlsx
+# Split Excel sheets to multiple csv/xlsx
 
 **Description:** The python script "split_excel_sheet_to_mult_csv_or_excel.py" reads the each sheets from the input excel file and creates seperate files (csv or excel based on user input).
 
