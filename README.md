@@ -11,6 +11,9 @@
 1. Download the python script "split_excel_sheet_to_mult_csv_or_excel.py".
 2. Go to the folder where the file is downloaded and open the terminal.
 3. Run the following command: ```python3 split_excel_sheet_to_mult_csv_or_excel.py```
-4. Enter the path of input excel file: <**path for input excel sheet**>
-5. Enter the path for input excel sheet: <**path for output folder**>
-6. Specify Output Format: csv=1 or excel=2: <**1** to get output in csv format / **2** to get output as xlsx format>
+4. Enter the path of input folder where excel file/s present: <**path for folder where excel file/s present**>
+5. Specify Output Format: csv=1 or excel=2: <**1** to get output in csv format / **2** to get output as xlsx format>
+
+**Output**
+* ./Split_files/<FilesName_sheetname.csv/xlsx>
+* ./Error.<TimeStamp>.log
