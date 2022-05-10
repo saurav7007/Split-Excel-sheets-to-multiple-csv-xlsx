@@ -12,7 +12,7 @@ while len(glob.glob(os.path.join(path_of_input_folder, "*.xlsx"))) == 0:
 output_format = int(input("Specify Output Format: csv=1 or excel=2: "))
 
 while output_format < 1 or output_format > 2:
-     output_format = int(input("Specify Output Format: csv=1 or excel=2: "))
+     output_format = int(input("Wrong format!! Specify the correct Output Format: csv=1 or excel=2: "))
      
 error_log = open("Error"+str(datetime.now())+".log", "a")
 
