@@ -7,7 +7,7 @@ path_of_input_folder = input("Enter the path of input folder where excel file/s 
 
 while len(glob.glob(os.path.join(path_of_input_folder, "*.xlsx"))) == 0:
     print('No excel files in the folder.')
-    path_of_input_folder = input("Enter the path of input folder where excel file is saved: ")
+    path_of_input_folder = input("Enter the path of input folder where excel file/s present: ")
 
 output_format = int(input("Specify Output Format: csv=1 or excel=2: "))
 
