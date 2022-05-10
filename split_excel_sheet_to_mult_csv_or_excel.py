@@ -3,7 +3,7 @@
 import os, glob, pandas as pd
 from datetime import datetime
 
-path_of_input_folder = input("Enter the path of input folder where excel file is saved: ")
+path_of_input_folder = input("Enter the path of input folder where excel file/s present: ")
 
 while len(glob.glob(os.path.join(path_of_input_folder, "*.xlsx"))) == 0:
     print('No excel files in the folder.')
