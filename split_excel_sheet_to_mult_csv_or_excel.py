@@ -44,6 +44,10 @@ for file in glob.glob(os.path.join(path_of_input_folder, "*.xlsx")):
         
     for sheet in sheet_names:
         df = pd.read_excel(os.path.join(path_of_input_folder, file), sheet_name=sheet)
+        date_columns = df.select_dtypes(include=['datetime64']).columns.tolist()
+        for i in date_columns:
+            df[i] = df[i].dt.strftime('%d/%m/%Y')
+            
         if output_format == 1:
             try:
                 df.to_csv("./Split_files/"+file.split("/")[-1].split('.')[0]+"_"+sheet+'.csv', quoting=2, doublequote=True, index=False)
