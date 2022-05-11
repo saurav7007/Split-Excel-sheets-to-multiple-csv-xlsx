@@ -14,4 +14,4 @@
 
 **Output**
 * ./Split_files/<FilesName_sheetname.csv/xlsx>
-* ./Error.<TimeStamp>.csv
+* ./Error.TimeStamp.csv
