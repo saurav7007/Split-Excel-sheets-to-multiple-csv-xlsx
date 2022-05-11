@@ -39,7 +39,7 @@ for file in glob.glob(os.path.join(path_of_input_folder, "*.xlsx")):
                 df.to_excel("./Split_files/"+file.split("/")[-1].split('.')[0]+"_"+sheet+'.xlsx'.format(sheet),sheet_name=sheet, index=False)
                 print('Complete writing excel file for sheet {} of file {}'.format(sheet,file.split("/")[-1]))
             except Exception as e:
-                error_log = error_log.write(str(e) + ' has occured in sheet ' + str(sheet) + 'of file ' + str(file) + '\n')
+                error_log = error_log.append({'File Name': file.split("/")[-1], 'Sheet Name': sheet, 'Status': 'FAIL', 'Error Message': e}, ignore_index = True)
                 print('Opps! ',e, ' has occured in sheet ', sheet, 'of file ' + file.split("/")[-1])
 
 error_log.to_csv('Error'+str(datetime.now())+'.csv', quoting=2, doublequote=True, index=False)
