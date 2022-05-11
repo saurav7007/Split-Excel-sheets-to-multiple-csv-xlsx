@@ -1,20 +1,21 @@
-#!/usr/bin/env python3
-
-import os, glob, pandas as pd
+import os, glob, configparser, pandas as pd
 from datetime import datetime
 
-path_of_input_folder = input("Enter the path of input folder where excel file/s present: ")
+config_obj = configparser.ConfigParser()
+config_obj.read("configfile.ini")
+
+path_of_input_folder = config_obj["input_folder"]["path_of_input_folder"]
+output_format = int(config_obj["file_format"]["file_format"])
+
 
 while len(glob.glob(os.path.join(path_of_input_folder, "*.xlsx"))) == 0:
     print('No excel files in the folder.')
     path_of_input_folder = input("Enter the path of input folder where excel file/s present: ")
 
-output_format = int(input("Specify Output Format: csv=1 or excel=2: "))
-
 while output_format < 1 or output_format > 2:
      output_format = int(input("Wrong format!! Specify the correct Output Format: csv=1 or excel=2: "))
      
-error_log = open("Error"+str(datetime.now())+".log", "a")
+error_log = pd.DataFrame(columns = ['File Name', 'Sheet Name', 'Status', 'Error Message'])
 
 for file in glob.glob(os.path.join(path_of_input_folder, "*.xlsx")):
     
@@ -31,15 +32,15 @@ for file in glob.glob(os.path.join(path_of_input_folder, "*.xlsx")):
                 df.to_csv("./Split_files/"+file.split("/")[-1].split('.')[0]+"_"+sheet+'.csv', quoting=2, doublequote=True, index=False)
                 print('Complete writing csv file for sheet {} of file {}'.format(sheet,file.split("/")[-1]))
             except Exception as e:
-                error_log.write(str(e) + ' has occured in sheet '+ str(sheet) + 'of file ' + str(file) + '\n')
+                error_log = error_log.append({'File Name': file.split("/")[-1], 'Sheet Name': sheet, 'Status': 'FAIL', 'Error Message': e}, ignore_index = True)
                 print('Opps! ',e, ' has occured in sheet ', sheet, 'of file ' + file.split("/")[-1])
         else: 
             try:
                 df.to_excel("./Split_files/"+file.split("/")[-1].split('.')[0]+"_"+sheet+'.xlsx'.format(sheet),sheet_name=sheet, index=False)
                 print('Complete writing excel file for sheet {} of file {}'.format(sheet,file.split("/")[-1]))
             except Exception as e:
-                error_log.write(str(e) + ' has occured in sheet ' + str(sheet) + 'of file ' + str(file) + '\n')
+                error_log = error_log.write(str(e) + ' has occured in sheet ' + str(sheet) + 'of file ' + str(file) + '\n')
                 print('Opps! ',e, ' has occured in sheet ', sheet, 'of file ' + file.split("/")[-1])
 
-error_log.close()
+error_log.to_csv('Error'+str(datetime.now())+'.csv', quoting=2, doublequote=True, index=False)
 
