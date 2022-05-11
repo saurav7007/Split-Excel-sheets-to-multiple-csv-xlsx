@@ -4,17 +4,14 @@
 
 **Pre-requsites:**
 * python 3.6+
-* glob
-* pandas module
-* Openpyxl module
+* modules:glob, configparser, pandas, Openpyxl
 
 **Steps:**
-1. Download the python script "split_excel_sheet_to_mult_csv_or_excel.py".
-2. Go to the folder where the file is downloaded and open the terminal.
-3. Run the following command: ```python3 split_excel_sheet_to_mult_csv_or_excel.py```
-4. Enter the path of input folder where excel file/s present: <**path for folder where excel file/s present**>
-5. Specify Output Format: csv=1 or excel=2: <**1** to get output in csv format / **2** to get output as xlsx format>
+1. Download the zip 'Split-Excel-sheets-to-multiple-csv-xlsx-main.zip' and extract the content.
+2. Go to the folder 'Split-Excel-sheets-to-multiple-csv-xlsx-main' and open the configfile.ini file.
+3. Update the value for "path_of_input_folder", and "file_format" and save it.
+4. Open the terminal in the same folder and run the following command: ```python3 split_excel_sheet_to_mult_csv_or_excel.py```
 
 **Output**
 * ./Split_files/<FilesName_sheetname.csv/xlsx>
-* ./Error.<TimeStamp>.log
+* ./Error.<TimeStamp>.csv
