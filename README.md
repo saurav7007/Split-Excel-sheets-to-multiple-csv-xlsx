@@ -4,7 +4,7 @@
 
 **Pre-requsites:**
 * python 3.6+
-* modules:glob, configparser, pandas, openpyxl
+* Modules: glob, configparser, pandas, openpyxl
 
 **Steps:**
 1. Download the zip 'Split-Excel-sheets-to-multiple-csv-xlsx-main.zip' and extract the content.
