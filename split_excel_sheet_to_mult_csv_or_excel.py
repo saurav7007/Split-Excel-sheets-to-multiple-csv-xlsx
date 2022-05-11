@@ -1,19 +1,36 @@
-import os, glob, configparser, pandas as pd
+#!/usr/bin/env python3
+
+import os, sys, glob, configparser, pandas as pd
 from datetime import datetime
 
 config_obj = configparser.ConfigParser()
 config_obj.read("configfile.ini")
 
 path_of_input_folder = config_obj["input_folder"]["path_of_input_folder"]
-output_format = int(config_obj["file_format"]["file_format"])
 
+if path_of_input_folder == '':
+    print('Value for path_of_input_folder is missing in the configfile.ini file. Add absolute path of the folder where excel file/s present')
+    sys.exit()
 
-while len(glob.glob(os.path.join(path_of_input_folder, "*.xlsx"))) == 0:
-    print('No excel files in the folder.')
-    path_of_input_folder = input("Enter the path of input folder where excel file/s present: ")
+output_format = config_obj["file_format"]["file_format"]
 
-while output_format < 1 or output_format > 2:
-     output_format = int(input("Wrong format!! Specify the correct Output Format: csv=1 or excel=2: "))
+if output_format == '':
+    print('Value for file_format is missing in the configfile.ini file. Add appropirate format.')
+    sys.exit()
+
+try:
+    output_format = int(output_format)
+except (ValueError):
+    print('Wrong format!! Add appropirate format: csv=1 or excel=2 in the configfile.ini file.')
+    sys.exit()
+
+if len(glob.glob(os.path.join(path_of_input_folder, "*.xlsx"))) == 0:
+    print('No excel files in the folder. Update the absolute path of the folder where excel file/s present in the configfile.ini file')
+    sys.exit()
+    
+if output_format < 1 or output_format > 2:
+    print('Wrong format!! Add appropirate format: csv=1 or excel=2 in the configfile.ini file')
+    sys.exit()
      
 error_log = pd.DataFrame(columns = ['File Name', 'Sheet Name', 'Status', 'Error Message'])
 
@@ -43,4 +60,3 @@ for file in glob.glob(os.path.join(path_of_input_folder, "*.xlsx")):
                 print('Opps! ',e, ' has occured in sheet ', sheet, 'of file ' + file.split("/")[-1])
 
 error_log.to_csv('Error'+str(datetime.now())+'.csv', quoting=2, doublequote=True, index=False)
-
